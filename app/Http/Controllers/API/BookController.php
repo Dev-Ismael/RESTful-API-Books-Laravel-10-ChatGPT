@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 
 class BookController extends Controller
 {
@@ -14,8 +16,9 @@ class BookController extends Controller
         return response()->json(['data' => $books]);
     }
 
-    public function store(Request $request)
+    public function store(StoreBookRequest $request)
     {
+        // return "connected";
         $book = Book::create($request->all());
         return response()->json(['data' => $book], 201);
     }
@@ -29,7 +32,7 @@ class BookController extends Controller
         return response()->json(['data' => $book]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateBookRequest $request, $id)
     {
         $book = Book::find($id);
         if (!$book) {
