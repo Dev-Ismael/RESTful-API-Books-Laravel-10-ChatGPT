@@ -48,16 +48,15 @@ class Handler extends ExceptionHandler
     }
 
 
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $exception)  // "render" Method in Laravel is responsible for rendering exceptions that occur during HTTP requests.
     {
-        if ($exception instanceof ValidationException) {
+        if ($exception instanceof ValidationException) {  // If the exception thrown is a ValidationException.
             return response()->json([
                 'message' => 'The given data was invalid.',
                 'errors' => $exception->errors(),
             ], 422);
         }
-
-        return parent::render($request, $exception);
+        return parent::render($request, $exception);   // If the exception is not a ValidationException, the method simply calls the render method of the parent class.
     }
 
 }
